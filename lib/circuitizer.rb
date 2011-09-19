@@ -1,8 +1,9 @@
-require 'lib/circuitizer/node'
-require 'lib/circuitizer/gate'
-require 'lib/circuitizer/trace'
-require 'lib/circuitizer/source'
-require 'lib/circuitizer/reading'
+require_relative 'circuitizer/node'
+require_relative 'circuitizer/gate'
+require_relative 'circuitizer/trace'
+require_relative 'circuitizer/source'
+require_relative 'circuitizer/reading'
+require_relative 'circuitizer/graph'
 module Circuitizer
 
 end

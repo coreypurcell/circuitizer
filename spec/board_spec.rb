@@ -1,22 +1,30 @@
-require 'lib/circuitizer/board'
+require_relative '../lib/circuitizer/board'
 
 describe Board do
 
-  it "evaluates a single and gate" do
-    b = Board.new
-    b << Source.new('A')
-    b << Source.new('B')
-    b << AndGate.new('Gate')
-    b << Trace.new.start(b['A']).end(b['Gate'])
-    b << Trace.new.start(b['B']).end(b['Gate'])
-    b << Reading.new('Out')
-    b << Trace.new.start(b['Gate']).end(b['Out'])
+  before do
+    @b = Board.new
+    @b << Source.new('a')
+    @b << Source.new('b')
+    @b << AndGate.new('gate')
+    @b << Trace.new.start(@b['a']).end(@b['gate'])
+    @b << Trace.new.start(@b['b']).end(@b['gate'])
+    @b << Reading.new('out')
+    @b << Trace.new.start(@b['gate']).end(@b['out'])
 
-    b['A'].set 1
-    b['B'].set 1
-    b.run
-
-    b['Out'].value.should == 1
-
+    @b['a'].set true
+    @b['b'].set true
   end
+
+  it "evaluates a single AND gate" do
+    @b.run
+
+    @b['Out'].value.should == true
+  end
+
+  it "prints a DOT for the board" do
+    @b.print.should match(/digraph/)
+    puts @b.print
+  end
+
 end

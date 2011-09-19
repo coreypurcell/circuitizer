@@ -5,13 +5,22 @@ class Trace
     self.object_id.to_s
   end
 
-  def start(el)
-    @start = el
-    self
+  def start(el = nil)
+    if el
+      @start = el
+      self
+    else
+      @start
+    end
   end
 
-  def end(el)
-    @end = el
-    self
+
+  def end(el=nil)
+    if el
+      @end = el
+      self
+    else
+      @end
+    end
   end
 end

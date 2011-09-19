@@ -1,12 +1,12 @@
-require 'lib/circuitizer/gate'
-require 'lib/circuitizer/source'
-require 'lib/circuitizer/trace'
+require_relative '../lib/circuitizer/gate'
+require_relative '../lib/circuitizer/source'
+require_relative '../lib/circuitizer/trace'
 
 describe Gate do
 
   describe AndGate do
 
-    let(:and_gate){ AndGate.new }
+    let(:and_gate){ AndGate.new('G1') }
 
     it { and_gate.inputs.size.should == 2 }
 

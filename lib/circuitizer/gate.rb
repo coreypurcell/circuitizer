@@ -1,15 +1,5 @@
 class Gate < Node
 
-  attr_reader :name
-
-  def initialize(name)
-    @name = name
-  end
-
-  def to_s
-    name
-  end
-
   def inputs
     raise "Not implemented, you must override"
   end

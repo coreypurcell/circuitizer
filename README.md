@@ -32,6 +32,20 @@ In IRB:
     puts b.print #returns the DOT text
 
 
+Print in Graphviz
+
+    # you need to capture the output from b.print then run it through
+    # graphviz
+
+    # write to a file
+    File.open('circuit.dot', 'w+') do |f|
+      f.write(b.print)
+    end
+    
+    # from the command line
+    dot -Tps -o circuit.ps circuit.dot
+    
+
 
 #### Where do we go from here?
 

@@ -1,3 +1,4 @@
+require_relative '../lib/circuitizer/node'
 require_relative '../lib/circuitizer/gate'
 require_relative '../lib/circuitizer/source'
 require_relative '../lib/circuitizer/trace'
@@ -11,17 +12,24 @@ describe Gate do
     it { and_gate.inputs.size.should == 2 }
 
     it "returns 1 if both inputs are 1" do
-      and_gate.inputs = [1,1]
-      and_gate.output.should == 1
+      and_gate.inputs = [true,true]
+      and_gate.output.should == true 
     end
 
     it "returns 0 all other times" do
-      and_gate.inputs = [1,0]
-      and_gate.output.should == 0
-      and_gate.inputs = [0,1]
-      and_gate.output.should == 0
-      and_gate.inputs = [0,0]
-      and_gate.output.should == 0
+      and_gate.inputs = [true,false]
+      and_gate.output.should == false
+      and_gate.inputs = [false,true]
+      and_gate.output.should == false
+      and_gate.inputs = [false,false]
+      and_gate.output.should == false
+    end
+
+    it "shifts an input in" do
+      and_gate.input_shift true
+      and_gate.inputs.should == [true,nil]
+      and_gate.input_shift false
+      and_gate.inputs.should == [false, true]
     end
 
   end

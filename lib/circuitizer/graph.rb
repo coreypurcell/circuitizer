@@ -11,13 +11,14 @@ class Graph
     @nodes << dot_node(node.name)
   end
 
-  def add_edge(trace)
-    @edges << dot_edge(trace.start, trace.end)
+  def add_edge(trace, val=nil)
+    val ||= false
+    @edges << dot_edge(trace.start, trace.end, val )
   end
 
   def to_dot
     @board.nodes.each { |n| add_node(n) }
-    @board.edges.each { |e| add_edge(e) }
+    @board.edges.each { |e| add_edge(e, e.value) }
     dot_header +
       @nodes.join +
       @edges.join +
@@ -38,8 +39,12 @@ class Graph
     "\t#{quote(name)} [#{options(name)}]\n"
   end
 
-  def dot_edge(start_name, end_name)
-    "\t#{start_name.to_s} -> #{end_name.to_s}\n"
+  def dot_edge(start_name, end_name, val)
+    "\t#{start_name.to_s} -> #{end_name.to_s} [label=#{edge_value(val)}]\n"
+  end
+
+  def edge_value(val)
+    '"' + val.to_s + '"'
   end
 
   def options(name)

@@ -5,6 +5,10 @@ class Trace
     self.object_id.to_s
   end
 
+  def value
+    @start.output if @start
+  end
+
   def start(el = nil)
     if el
       @start = el

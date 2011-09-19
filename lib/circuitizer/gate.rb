@@ -9,7 +9,7 @@ end
 class AndGate < Gate
 
   def inputs
-    [0, 0]
+    @inputs ||= [nil, nil]
   end
 
   def inputs=(ins)
@@ -18,12 +18,16 @@ class AndGate < Gate
     @inputs = ins
   end
 
+  def input_shift(value)
+    @inputs = inputs.unshift(value)[0..1]
+  end
+
   def output
     case @inputs
-    when [1,1]
-      1
+    when [true, true]
+      true
     else
-      0
+      false
     end
   end
 

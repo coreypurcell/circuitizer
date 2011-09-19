@@ -19,14 +19,14 @@ describe Graph do
   end
 
   describe '#add_edge' do
-    let(:trace) { double("Trace", :name => "T1", :start => "G1", :end => "G2") }
+    let(:trace) { double("Trace", :name => "T1", :start => "G1", :end => "G2", :output => true) }
     it "adds an edge to the edges array" do
       expect {@graph.add_edge(trace)}.should change{@graph.edges.size}.by(1)
     end
 
     it "creates a dot edge from a trace" do
       @graph.add_edge(trace)
-      @graph.edges.first.should == "\t#{trace.start} -> #{trace.end}\n"
+      @graph.edges.first.should == "\t#{trace.start} -> #{trace.end} [label=\"false\"]\n"
     end
   end
 

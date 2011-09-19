@@ -36,21 +36,30 @@ class Board
   def run
     # walk the tree of traces from left to right
 
-    traces = @elements.inject([]) { |traces, v| traces << v.last if v.last.kind_of? Trace; traces }
-
-    board_map = traces.inject({}) do |m, trace|
+    board_map = edges.inject({}) do |m, trace|
       m[trace.start.name] = [] if m[trace.start.name].nil?
       m[trace.start.name] += [trace.end.name]
       m
     end
+    board_map = nodes.inject(board_map) do |m, node|
+      unless m[node.name]
+        m[node.name] = []
+      end
+      m
+    end
 
-    p board_map
-    p board_map.tsort
+    board_order = board_map.tsort.reverse
+
+    board_order.each do |k|
+      board_map[k].each do |element|
+        @elements[element].input_shift(@elements[k].output)
+      end
+    end
+
   end
 
   def print
     Graph.new(self).to_dot
   end
-
 
 end

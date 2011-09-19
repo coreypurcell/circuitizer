@@ -19,12 +19,17 @@ describe Board do
   it "evaluates a single AND gate" do
     @b.run
 
-    @b['Out'].value.should == true
+    @b['out'].value.should == true
+    @b['gate'].output.should == true
   end
 
   it "prints a DOT for the board" do
     @b.print.should match(/digraph/)
-    puts @b.print
+  end
+
+  it "sets the edge labels equal to the trace values after run" do
+    @b.run
+    @b.print.should match(/gate -> out \[label="true"\]/)
   end
 
 end

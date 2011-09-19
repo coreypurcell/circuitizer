@@ -42,9 +42,14 @@ describe Gate do
 
     it "can have it's value set" do
       s = Source.new
-      s.output.should == 0
-      s.set(1)
-      s.output.should == 1
+      s.output.should == false
+      s.set(true)
+      s.output.should == true
+    end
+
+    it "can have it's value set during instansiation" do
+      s = Source.new('s1', true)
+      s.output.should == true
     end
 
   end

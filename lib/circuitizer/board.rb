@@ -1,6 +1,4 @@
-require 'circuitizer'
 require 'tsort'
-
 class Hash
   include TSort
   alias tsort_each_node each_key

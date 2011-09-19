@@ -1,4 +1,4 @@
-require_relative '../lib/circuitizer/board'
+require_relative '../lib/circuitizer'
 
 describe Board do
 
@@ -30,6 +30,30 @@ describe Board do
   it "sets the edge labels equal to the trace values after run" do
     @b.run
     @b.print.should match(/gate -> out \[label="true"\]/)
+  end
+
+  context 'with a more complex circuit' do
+    it "solves stacked gates" do
+      b = Board.new
+      b << Source.new('S1', true)
+      b << Source.new('S2', true)
+      b << Source.new('S3', true)
+      b << AndGate.new('G1')
+      b << AndGate.new('G2')
+      b << Reading.new('O')
+      b << Trace.new.start(b['S1']).end(b['G1'])
+      b << Trace.new.start(b['S2']).end(b['G1'])
+      b << Trace.new.start(b['S3']).end(b['G2'])
+      b << Trace.new.start(b['G1']).end(b['G2'])
+      b << Trace.new.start(b['G2']).end(b['O'])
+
+      b.run
+      b['O'].output.should == true
+
+      b['S3'].set false
+      b.run
+      b['O'].output.should == false
+    end
   end
 
 end

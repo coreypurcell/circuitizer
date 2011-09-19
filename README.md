@@ -4,13 +4,16 @@ Circuitizer
 A simple digital circuit solver that prints it's output with the DOT
 Language.
 
+In IRB:
+
+    $:.unshift '.'
     require 'lib/circuitizer'
 
     # creating our nodes (gates, sources, readings)
     # label them with a unique name
     b = Board.new
-    b << Source.new('IN-1')
-    b << Source.new('IN-2')
+    b << Source.new('IN-1', true)
+    b << Source.new('IN-2', true)
     b << AndGate.new('A-Gate')
     b << Reading.new('OUT')
 
@@ -19,11 +22,12 @@ Language.
     b << Trace.new.start(b['IN-2']).end(b['A-Gate'])
     b << Trace.new.start(b['A-Gate']).end(b['OUT'])
 
-    # set your sources
+    # set your sources manually if you didn't above
+    # or you can change them for a second run
     b['IN-1'].set true
     b['IN-2'].set true
 
-    # run it an print
+    # run it and print
     b.run
     puts b.print #returns the DOT text
 

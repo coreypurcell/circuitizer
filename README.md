@@ -1,43 +1,34 @@
-# Academic Exercise: Digital Logic Simulator
+Circuitizer
+==========
 
-_written by Gregory Brown for Mendicant University core skills session #9_
+A simple digital circuit solver that prints it's output with the DOT
+Language.
 
-I had a lot of fun coming up with the ["All Wired Up" PuzzleNode problem](http://puzzlenode.com/puzzles/18) 
-that was part of this session's entrance 
-exam. At the time I was writing it, I had thought about building a more 
-generally useful tool for playing around with simulated digital circuits, 
-but then I quickly got too busy to look into it further.
+    require 'lib/circuitizer'
 
-Then, I started playing Minecraft and my interest in circuitry simulations was
-reignited! The game has a [full circuitry system](http://www.minecraftwiki.net/wiki/Redstone_circuits) for doing all sorts of fun logical
-processing based on the most primitive inputs. But Minecraft is much better
-as a game than as a learning environment, and it can be a very frustrating
-and tedious environment to try to study circuitry in. I want a tool that
-doesn't make me afraid of being attacked by zombies while I build my logic
-gates!
+    # creating our nodes (gates, sources, readings)
+    # label them with a unique name
+    b = Board.new
+    b << Source.new('IN-1')
+    b << Source.new('IN-2')
+    b << AndGate.new('A-Gate')
+    b << Reading.new('OUT')
 
-In this exercise, I would like you to build a tool that makes exploring
-digital circuitry fun and interesting. The summary below provides some
-suggestions on what things in particular I have in mind, but everyone
-should be able to come up with their own unique take on the idea without
-too much overlap.
+    # wire up the nodes with traces
+    b << Trace.new.start(b['IN-1']).end(b['A-Gate'])
+    b << Trace.new.start(b['IN-2']).end(b['A-Gate'])
+    b << Trace.new.start(b['A-Gate']).end(b['OUT'])
 
-## Exercise Summary
+    # set your sources
+    b['IN-1'].set true
+    b['IN-2'].set true
 
-- You should create a tool that makes exploring and learning about
-  logical circuitry fun and interesting.
-- You can use the "All Wired Up" problem and MineCraft's Redstone circuits
-  as an inspiration, but be sure to have some fresh ideas of your own.
-- You should be able to build modular gates that can be re-used in other circuits.
-- The way you handle input and output visualization is completely up to 
-  you
-- Your tool should be easy to work with for someone who wants to explore circuitry but is not necessarily a programmer.
-- It should be possible to assign inputs, evaluate the circuits, and then inspect their outputs.
-- Some sort of friendly debugging process and tools would be nice to have.
+    # run it an print
+    b.run
+    puts b.print #returns the DOT text
 
-## Submission Guidelines
 
-If you plan to work on this exercise, you should fork this repository 
-and push code early and often during the course. The course 
-guidelines PDF explains the submission process in detail, but please 
-contact an instructor if you have any questions.
+
+#### Where do we go from here?
+
+Check github issues.

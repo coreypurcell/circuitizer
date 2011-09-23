@@ -1,5 +1,7 @@
 require 'tsort'
-class Hash
+require_relative 'dsl'
+
+class BoardMap < Hash
   include TSort
   alias tsort_each_node each_key
   def tsort_each_child(node, &blk)
@@ -9,10 +11,13 @@ end
 
 class Board
 
+  include DSL
+
   attr_accessor :elements
 
-  def initialize
+  def initialize(&blk)
     @elements = {}
+    instance_exec(&blk) if block_given?
   end
 
   def <<(element)
@@ -24,17 +29,20 @@ class Board
   end
 
   def nodes
-    @elements.inject([]) { |nodes, v| nodes << v.last unless v.last.kind_of? Trace; nodes }
+    els = @elements.reject { |name, node| node.kind_of? Trace }
+    els.values
   end
-  
+
   def edges
-    @elements.inject([]) { |traces, v| traces << v.last if v.last.kind_of? Trace; traces }
+    els = @elements.select { |name, node| node.kind_of? Trace }
+    els.values
   end
 
   def run
     # walk the tree of traces from left to right
 
-    board_map = edges.inject({}) do |m, trace|
+    board_map = BoardMap.new
+    board_map = edges.inject(board_map) do |m, trace|
       m[trace.start.name] = [] if m[trace.start.name].nil?
       m[trace.start.name] += [trace.end.name]
       m
@@ -56,8 +64,14 @@ class Board
 
   end
 
+  def outputs
+    readings = nodes.select { |n| n.kind_of? Reading }
+    readings.inject({}) { |s, r| s[r.name] = r.value; s }
+  end
+
   def print
     Graph.new(self).to_dot
   end
 
 end
+

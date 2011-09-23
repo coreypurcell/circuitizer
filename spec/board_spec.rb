@@ -32,6 +32,11 @@ describe Board do
     @b.print.should match(/gate -> out \[label="true"\]/)
   end
 
+  it "shows the outputs" do
+    @b.run
+    @b.outputs.should == {'out' => true}
+  end
+
   context 'with a more complex circuit' do
     it "solves stacked gates" do
       b = Board.new
@@ -53,6 +58,22 @@ describe Board do
       b['S3'].set false
       b.run
       b['O'].output.should == false
+    end
+  end
+
+  context 'using a better DSL' do
+    it "solves a circuit" do
+      b = Board.new do
+        source 's1', true
+        source 's2', true
+        and_gate 'AND'
+        reading 'OUT'
+        trace 's1', 'AND'
+        trace 's2', 'AND'
+        trace 'AND', 'OUT'
+      end
+      b.run
+      b['OUT'].output.should == true
     end
   end
 

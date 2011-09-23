@@ -5,6 +5,7 @@ require_relative 'circuitizer/trace'
 require_relative 'circuitizer/source'
 require_relative 'circuitizer/reading'
 require_relative 'circuitizer/graph'
+require_relative 'circuitizer/dot_writer'
 
 module Circuitizer
 

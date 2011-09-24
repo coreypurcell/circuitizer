@@ -46,6 +46,18 @@ describe Gate do
     end
   end
 
+  describe XorGate do
+    let(:xor_gate) { XorGate.new }
+    it "returns false when both inputs true" do
+      xor_gate.inputs = [true, true]
+      xor_gate.output.should be_false
+    end
+    it "returns true when one input is true" do
+      xor_gate.inputs = [false, true]
+      xor_gate.output.should be_true
+    end
+  end
+
 
   describe Source do
     it "has an output" do

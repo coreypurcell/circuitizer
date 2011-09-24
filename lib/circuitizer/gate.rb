@@ -47,3 +47,18 @@ class OrGate < Gate
   end
 
 end
+
+class XorGate < Gate
+
+  def output
+    case @inputs
+    when [true, false]
+      true
+    when [false, true]
+      true
+    else
+      false
+    end
+  end
+
+end

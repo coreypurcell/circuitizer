@@ -4,6 +4,13 @@ Circuitizer
 A simple digital circuit solver that prints it's output with the DOT
 Language.
 
+### Graphviz must be installed
+
+On a Mac you can use homebrew
+    
+    brew update
+    brew install graphviz
+
 ### Examples
   
     ruby examples/simple_gate.rb

@@ -4,6 +4,14 @@ Circuitizer
 A simple digital circuit solver that prints it's output with the DOT
 Language.
 
+### Examples
+  
+    ruby examples/simple_gate.rb
+
+will output simple_gate.ps which looks like this
+
+![Circuit](http://dl.dropbox.com/u/262398/simple_gate.png)
+
 In IRB:
 
     $:.unshift '.'

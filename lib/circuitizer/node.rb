@@ -9,4 +9,8 @@ class Node
     name
   end
 
+  def shape
+    "circle"
+  end
+
 end

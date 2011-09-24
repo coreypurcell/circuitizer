@@ -8,7 +8,7 @@ class Graph
   end
 
   def add_node(node)
-    @nodes << dot_node(node.name)
+    @nodes << dot_node(node.name, node.shape)
   end
 
   def add_edge(trace, val=nil)
@@ -35,23 +35,23 @@ class Graph
     "}\n"
   end
 
-  def dot_node(name)
-    "\t#{quote(name)} [#{options(name)}]\n"
+  def dot_node(name, shape='box')
+    "\t#{quote(name)} [#{options(name, shape)}]\n"
   end
 
   def dot_edge(start_name, end_name, val)
-    "\t#{start_name.to_s} -> #{end_name.to_s} [label=#{edge_value(val)}]\n"
+    "\t#{start_name} -> #{end_name} [label=#{edge_value(val)}]\n"
   end
 
   def edge_value(val)
-    '"' + val.to_s + '"'
+    %Q{"#{val}"}
   end
 
-  def options(name)
-    'shape=box, label="' + name.to_s + '"'
+  def options(name, shape)
+    %Q{shape=#{shape}, label="#{name}"}
   end
 
   def quote(name)
-    '"' + name.to_s + '"'
+    %Q{"#{name}"}
   end
 end

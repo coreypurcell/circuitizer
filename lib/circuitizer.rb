@@ -1,4 +1,5 @@
 require_relative 'circuitizer/board'
+require_relative 'circuitizer/board_map'
 require_relative 'circuitizer/node'
 require_relative 'circuitizer/gate'
 require_relative 'circuitizer/trace'

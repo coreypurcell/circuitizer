@@ -8,6 +8,10 @@ module DSL
     self << AndGate.new(name)
   end
 
+  def or_gate(name)
+    self << OrGate.new(name)
+  end
+
   def reading(name)
     self << Reading.new(name)
   end

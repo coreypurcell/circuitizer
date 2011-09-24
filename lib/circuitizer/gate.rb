@@ -4,9 +4,9 @@ class Gate < Node
     raise "Not implemented, you must override"
   end
 
-end
-
-class AndGate < Gate
+  def shape
+    "box"
+  end
 
   def inputs
     @inputs ||= [nil, nil]
@@ -22,12 +22,27 @@ class AndGate < Gate
     @inputs = inputs.unshift(value)[0..1]
   end
 
+end
+
+class AndGate < Gate
+
   def output
-    case @inputs
-    when [true, true]
+    if @inputs == [true, true]
       true
     else
       false
+    end
+  end
+
+end
+
+class OrGate < Gate
+
+  def output
+    if @inputs == [false, false]
+      false
+    else
+      true
     end
   end
 

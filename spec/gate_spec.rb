@@ -34,6 +34,18 @@ describe Gate do
 
   end
 
+  describe OrGate do
+    let(:or_gate) { OrGate.new }
+    it "returns false when both inputs false" do
+      or_gate.inputs = [false, false]
+      or_gate.output.should be_false
+    end
+    it "returns true when both inputs are not false" do
+      or_gate.inputs = [false, true]
+      or_gate.output.should be_true
+    end
+  end
+
 
   describe Source do
     it "has an output" do

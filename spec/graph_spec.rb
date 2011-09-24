@@ -1,4 +1,4 @@
-require_relative '../lib/circuitizer/graph'
+require 'circuitizer'
 
 describe Graph do
 
@@ -7,7 +7,7 @@ describe Graph do
   end
 
   describe '#add_node' do
-    let(:gate) { double("Gate", :name => "GATE") }
+    let(:gate) { Gate.new('GATE') }
     it "adds a node to the nodes array" do
       expect {@graph.add_node(gate)}.should change{@graph.nodes.size}.by(1)
     end

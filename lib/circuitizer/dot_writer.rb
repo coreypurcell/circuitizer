@@ -1,10 +1,12 @@
-class DotWriter
+module Circuitizer
+  class DotWriter
 
-  def self.write(board, filename)
-    g = Graph.new(board)
-    IO.popen("dot -Tps -o #{filename}", 'r+') do |dot|
-      dot.write(g.to_dot)
+    def self.write(board, filename)
+      g = Graph.new(board)
+      IO.popen("dot -Tps -o #{filename}", 'r+') do |dot|
+        dot.write(g.to_dot)
+      end
     end
-  end
 
+  end
 end

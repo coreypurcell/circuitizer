@@ -1,6 +1,7 @@
 require 'circuitizer'
 require 'tempfile'
 
+include Circuitizer
 describe DotWriter do
   it "writes a board to a file" do
     b = Board.new do

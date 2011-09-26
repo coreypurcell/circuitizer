@@ -1,5 +1,6 @@
 require 'circuitizer'
 
+include Circuitizer
 describe Graph do
 
   before do

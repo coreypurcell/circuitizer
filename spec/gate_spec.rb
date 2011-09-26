@@ -3,6 +3,7 @@ require_relative '../lib/circuitizer/gate'
 require_relative '../lib/circuitizer/source'
 require_relative '../lib/circuitizer/trace'
 
+include Circuitizer
 describe Gate do
 
   describe AndGate do

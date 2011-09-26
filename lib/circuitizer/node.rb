@@ -1,16 +1,18 @@
-class Node
-  attr_reader :name
-  
-  def initialize(name=nil)
-    @name = name
-  end
+module Circuitizer
+  class Node
+    attr_reader :name
 
-  def to_s
-    name
-  end
+    def initialize(name=nil)
+      @name = name
+    end
 
-  def shape
-    "circle"
-  end
+    def to_s
+      name
+    end
 
+    def shape
+      "circle"
+    end
+
+  end
 end

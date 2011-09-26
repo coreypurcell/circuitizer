@@ -1,5 +1,6 @@
 require_relative '../lib/circuitizer'
 
+include Circuitizer
 describe Board do
 
   before do

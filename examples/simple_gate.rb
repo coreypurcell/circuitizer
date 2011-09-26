@@ -1,4 +1,5 @@
-require_relative '../lib/circuitizer'
+require 'circuitizer'
+include Circuitizer
 
 board = Board.new do
   source 'S1', true
